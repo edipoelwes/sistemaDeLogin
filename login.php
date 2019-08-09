@@ -1,17 +1,12 @@
 <?php 
 session_start();
 
-if(isset($_SESSION['email']) && !empty($_SESSION['email'])){
+if(isset($_POST['email']) && !empty($_POST['email'])){
     $email = addslashes($_POST['email']);
     $senha = md5(addslashes($_POST['senha']));
 
-    $dsn = "mysql:dbname=teste;host=localhost";
-    $dbuser= "root";
-    $dbpass = "";
-
     try{
-        $db = new PDO( $dsn,  $dbuser, $dbpass);
-
+        $db = new PDO("mysql:dbname=blog;host=localhost","root","");
         $sql = $db->query("SELECT * FROM usuarios WHERE email= '$email' AND senha= '$senha'");
 
         
